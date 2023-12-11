@@ -21,7 +21,7 @@ File.readlines('puzzle-input.txt').each do |line|
   elsif line.split(" ").length > 1
     line_values = {
       destination_range_start: line.split(' ')[0].to_i,
-      soure_range_start: line.split(' ')[1].to_i,
+      source_range_start: line.split(' ')[1].to_i,
       range_length: line.split(' ')[2].to_i,
     }
     eval("#{current_section} << line_values")
@@ -30,11 +30,11 @@ end
 
 def find_match_for(mapping, source_value)
   match = mapping.select do |row| 
-    row[:soure_range_start] <= source_value && source_value <= (row[:soure_range_start] + row[:range_length])  
+    row[:source_range_start] <= source_value && source_value <= (row[:source_range_start] + row[:range_length])  
   end.first
 
   if match
-    source_index = source_value - match[:soure_range_start]
+    source_index = source_value - match[:source_range_start]
     return match[:destination_range_start] + source_index
   end
 end
